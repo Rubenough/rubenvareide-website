@@ -32,9 +32,10 @@ export default async function handler(req, res) {
     for (const emote of emotesData.data) {
       const tier = parseInt(emote.tier) / 1000;
       if (tiers[tier]) {
+        const format = emote.format.includes("animated") ? "animated" : "static";
         tiers[tier].push({
           name: emote.name,
-          url: emote.images.url_2x,
+          url: `https://static-cdn.jtvnw.net/emoticons/v2/${emote.id}/${format}/dark/2.0`,
         });
       }
     }
