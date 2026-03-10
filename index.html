@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Hopp til innhold</a>
     <!-- NAV -->
-    <nav>
+    <nav aria-label="Hovednavigasjon">
       <div class="nav-logo">Ruben<span>Vareide</span></div>
       <ul class="nav-links">
         <li><a href="#twitch">Twitch</a></li>
@@ -24,7 +25,7 @@
     </nav>
 
     <!-- HERO -->
-    <div class="hero">
+    <div class="hero" id="main-content">
       <div class="hero-bg"></div>
       <div class="hero-tag">Streamer · Content Creator · TCG Selger</div>
       <h1 class="hero-name"><span class="accent">Ruben</span><br />Vareide</h1>
@@ -34,7 +35,7 @@
         finner du alt på ett sted — uten algoritmer, uten støy.
       </p>
       <div class="hero-live">
-        <div class="live-dot"></div>
+        <div class="live-dot" aria-hidden="true"></div>
         <span class="live-text">Følg live på Twitch</span>
       </div>
       <div class="hero-ctas">
@@ -56,7 +57,7 @@
         <!-- LEFT: CTA -->
         <div class="twitch-promo-left reveal">
           <div class="twitch-live-badge">
-            <div class="live-dot"></div>
+            <div class="live-dot" aria-hidden="true"></div>
             twitch.tv/rubenvareide
           </div>
           <h2 class="twitch-promo-title">
@@ -141,9 +142,9 @@
           <!-- EMOTES -->
           <div class="emotes-card">
             <div class="emotes-tabs">
-              <button class="emote-tab active" data-tier="1">Tier 1</button>
-              <button class="emote-tab" data-tier="2">Tier 2</button>
-              <button class="emote-tab" data-tier="3">Tier 3</button>
+              <button class="emote-tab active" data-tier="1" aria-label="Vis Tier 1 emotes">Tier 1</button>
+              <button class="emote-tab" data-tier="2" aria-label="Vis Tier 2 emotes">Tier 2</button>
+              <button class="emote-tab" data-tier="3" aria-label="Vis Tier 3 emotes">Tier 3</button>
             </div>
 
             <div class="emotes-tier-panel active" data-tier="1">
@@ -199,7 +200,7 @@
             Live streams, rip and ship av TCG-kort, gaming og hyggelig prat i
             chatten.
           </p>
-          <span class="platform-arrow">↗</span>
+          <span class="platform-arrow" aria-hidden="true">↗</span>
         </a>
 
         <a
@@ -213,7 +214,7 @@
             Videoer og Shorts — høylys av streams, pull-videoer og kortsnarlige
             øyeblikk.
           </p>
-          <span class="platform-arrow">↗</span>
+          <span class="platform-arrow" aria-hidden="true">↗</span>
         </a>
 
         <a
@@ -227,7 +228,7 @@
             Shorts og klipp fra streams — hurtige pulls, rare kort og morsomme
             øyeblikk.
           </p>
-          <span class="platform-arrow">↗</span>
+          <span class="platform-arrow" aria-hidden="true">↗</span>
         </a>
 
         <a
@@ -240,7 +241,7 @@
           <p class="platform-desc">
             Pokémon, Magic, One Piece og mer — rip and ship rett til døren din.
           </p>
-          <span class="platform-arrow">↗</span>
+          <span class="platform-arrow" aria-hidden="true">↗</span>
         </a>
       </div>
     </section>

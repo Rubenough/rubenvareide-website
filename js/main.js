@@ -57,7 +57,7 @@ async function loadProducts() {
           <div class="platform-name">${p.title}</div>
           <p class="platform-desc">${p.price} ${p.currency}</p>
           <span class="stock-badge ${p.available ? "available" : "sold-out"}">${p.available ? "På lager" : "Utsolgt"}</span>
-          <span class="platform-arrow">↗</span>
+          <span class="platform-arrow" aria-hidden="true">↗</span>
         </a>`,
       )
       .join("");
