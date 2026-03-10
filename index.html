@@ -24,8 +24,9 @@
       </ul>
     </nav>
 
+    <main id="main-content">
     <!-- HERO -->
-    <div class="hero" id="main-content">
+    <div class="hero">
       <div class="hero-bg"></div>
       <div class="hero-tag">Streamer · Content Creator · TCG Selger</div>
       <h1 class="hero-name"><span class="accent">Ruben</span><br />Vareide</h1>
@@ -141,21 +142,21 @@
         <div class="twitch-promo-right reveal">
           <!-- EMOTES -->
           <div class="emotes-card">
-            <div class="emotes-tabs">
-              <button class="emote-tab active" data-tier="1" aria-label="Vis Tier 1 emotes">Tier 1</button>
-              <button class="emote-tab" data-tier="2" aria-label="Vis Tier 2 emotes">Tier 2</button>
-              <button class="emote-tab" data-tier="3" aria-label="Vis Tier 3 emotes">Tier 3</button>
+            <div class="emotes-tabs" role="tablist" aria-label="Emote tiers">
+              <button class="emote-tab active" data-tier="1" role="tab" id="tab-tier-1" aria-controls="panel-tier-1" aria-selected="true">Tier 1</button>
+              <button class="emote-tab" data-tier="2" role="tab" id="tab-tier-2" aria-controls="panel-tier-2" aria-selected="false">Tier 2</button>
+              <button class="emote-tab" data-tier="3" role="tab" id="tab-tier-3" aria-controls="panel-tier-3" aria-selected="false">Tier 3</button>
             </div>
 
-            <div class="emotes-tier-panel active" data-tier="1">
+            <div class="emotes-tier-panel active" data-tier="1" role="tabpanel" id="panel-tier-1" aria-labelledby="tab-tier-1">
               <div class="emotes-grid"></div>
             </div>
 
-            <div class="emotes-tier-panel" data-tier="2">
+            <div class="emotes-tier-panel" data-tier="2" role="tabpanel" id="panel-tier-2" aria-labelledby="tab-tier-2">
               <div class="emotes-grid"></div>
             </div>
 
-            <div class="emotes-tier-panel" data-tier="3">
+            <div class="emotes-tier-panel" data-tier="3" role="tabpanel" id="panel-tier-3" aria-labelledby="tab-tier-3">
               <div class="emotes-grid"></div>
             </div>
           </div>
@@ -406,7 +407,7 @@
       </h2>
       <p class="section-desc reveal">
         Bestill en pakke — jeg åpner den live på Twitch og sender kortene hjem til deg.
-        <span id="stream-status-badge" style="display:inline-block;margin-left:0.5rem;font-size:0.95rem;font-weight:600;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,0.08);color:#aaa;vertical-align:middle;">Sjekker stream...</span>
+        <span id="stream-status-badge" aria-live="polite" aria-atomic="true" style="display:inline-block;margin-left:0.5rem;font-size:0.95rem;font-weight:600;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,0.08);color:#aaa;vertical-align:middle;">Sjekker stream...</span>
       </p>
       <div id="products-grid" class="platforms-grid"></div>
       <div style="text-align: center; margin-top: 2rem">
@@ -416,17 +417,17 @@
       </div>
     </section>
 
+    </main>
+
     <!-- FOOTER -->
     <footer>
       <div class="footer-logo">RubenVareide</div>
       <div class="footer-links">
-        <a href="https://www.twitch.tv/rubenvareide" target="_blank">Twitch</a>
-        <a href="https://www.youtube.com/@rubenvareide" target="_blank"
-          >YouTube</a
-        >
-        <a href="https://www.tiktok.com/@rubntcg" target="_blank">TikTok</a>
-        <a href="https://rubentcg.no" target="_blank">Shop</a>
-        <a href="https://discord.gg/rubenvareide" target="_blank">Discord</a>
+        <a href="https://www.twitch.tv/rubenvareide" target="_blank" aria-label="Twitch (åpnes i ny fane)">Twitch</a>
+        <a href="https://www.youtube.com/@rubenvareide" target="_blank" aria-label="YouTube (åpnes i ny fane)">YouTube</a>
+        <a href="https://www.tiktok.com/@rubntcg" target="_blank" aria-label="TikTok (åpnes i ny fane)">TikTok</a>
+        <a href="https://rubentcg.no" target="_blank" aria-label="RubenTCG Shop (åpnes i ny fane)">Shop</a>
+        <a href="https://discord.gg/rubenvareide" target="_blank" aria-label="Discord (åpnes i ny fane)">Discord</a>
       </div>
       <div class="footer-copy">© 2025 RubenVareide</div>
     </footer>

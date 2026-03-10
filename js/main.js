@@ -17,9 +17,10 @@ document.querySelectorAll(".emote-tab").forEach((tab) => {
   tab.addEventListener("click", () => {
     const tier = tab.dataset.tier;
     const card = tab.closest(".emotes-card");
-    card.querySelectorAll(".emote-tab").forEach((t) => t.classList.remove("active"));
+    card.querySelectorAll(".emote-tab").forEach((t) => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
     card.querySelectorAll(".emotes-tier-panel").forEach((p) => p.classList.remove("active"));
     tab.classList.add("active");
+    tab.setAttribute("aria-selected", "true");
     card.querySelector(`.emotes-tier-panel[data-tier="${tier}"]`).classList.add("active");
   });
 });
@@ -53,7 +54,7 @@ async function loadProducts() {
       .map(
         (p) => `
         <a href="https://apexcollect.no/products/${p.handle}" target="_blank" class="platform-card">
-          ${p.image ? `<img src="${p.image}" alt="${p.imageAlt}" class="product-img" />` : ""}
+          ${p.image ? `<img src="${p.image}" alt="${p.imageAlt || p.title}" class="product-img" />` : ""}
           <div class="platform-name">${p.title}</div>
           <p class="platform-desc">${p.price} ${p.currency}</p>
           <span class="stock-badge ${p.available ? "available" : "sold-out"}">${p.available ? "På lager" : "Utsolgt"}</span>

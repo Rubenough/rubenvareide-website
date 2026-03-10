@@ -10,7 +10,7 @@
   --discord: #5865f2;
   --shopify: #96bf48;
   --text: #f0f0f0;
-  --muted: #6b6b80;
+  --muted: #9898aa;
   --border: rgba(255, 255, 255, 0.06);
 }
 
@@ -189,7 +189,7 @@ nav {
   max-width: 480px;
   font-size: 1rem;
   line-height: 1.7;
-  color: rgba(240, 240, 240, 0.6);
+  color: rgba(240, 240, 240, 0.8);
   margin-bottom: 48px;
   animation: fadeUp 0.8s 0.3s ease both;
 }
@@ -391,7 +391,7 @@ section {
 
 .platform-desc {
   font-size: 0.85rem;
-  color: #9898aa;
+  color: var(--muted);
   line-height: 1.5;
   flex: 1;
 }
@@ -452,7 +452,7 @@ section {
 
 .tcg-text {
   font-size: 0.95rem;
-  color: rgba(240, 240, 240, 0.6);
+  color: rgba(240, 240, 240, 0.8);
   line-height: 1.8;
   margin-bottom: 32px;
 }
@@ -573,7 +573,7 @@ section {
 
 .discord-text {
   font-size: 0.95rem;
-  color: rgba(240, 240, 240, 0.6);
+  color: rgba(240, 240, 240, 0.8);
   line-height: 1.8;
   margin-bottom: 36px;
 }
@@ -713,7 +713,7 @@ footer {
 .footer-logo {
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.5rem;
-  color: #9898aa;
+  color: var(--muted);
   letter-spacing: 0.05em;
 }
 
@@ -723,7 +723,7 @@ footer {
 }
 
 .footer-links a {
-  color: #9898aa;
+  color: var(--muted);
   text-decoration: none;
   font-size: 0.8rem;
   font-family: "Space Mono", monospace;
@@ -736,7 +736,7 @@ footer {
 
 .footer-copy {
   font-size: 0.75rem;
-  color: #9898aa;
+  color: var(--muted);
   font-family: "Space Mono", monospace;
 }
 
@@ -871,7 +871,7 @@ footer {
 
 .twitch-promo-desc {
   font-size: 0.95rem;
-  color: rgba(240, 240, 240, 0.6);
+  color: rgba(240, 240, 240, 0.8);
   line-height: 1.8;
   margin-bottom: 36px;
   max-width: 420px;
@@ -1080,7 +1080,7 @@ footer {
 
 .day-off {
   font-size: 0.7rem;
-  color: rgba(107, 107, 128, 0.4);
+  color: var(--muted);
 }
 
 .schedule-note {
