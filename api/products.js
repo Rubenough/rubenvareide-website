@@ -30,24 +30,42 @@ export default async function handler(req, res) {
   try {
     const token = await getStorefrontToken();
 
+    const query = `{
+      products(first: 20, query: "vendor:RubenTCG") {
+        edges {
+          node {
+            title
+            handle
+            featuredImage { url altText }
+            priceRange {
+              minVariantPrice { amount currencyCode }
+            }
+          }
+        }
+      }
+    }`;
+
     const productsRes = await fetch(
-      `https://${process.env.SHOPIFY_SHOP}/admin/api/2024-01/products.json?vendor=RubenTCG&published_status=published&limit=20`,
+      `https://${process.env.SHOPIFY_SHOP}/api/2024-01/graphql.json`,
       {
+        method: "POST",
         headers: {
-          "X-Shopify-Access-Token": token,
+          "Content-Type": "application/json",
+          "Shopify-Storefront-Private-Token": token,
         },
+        body: JSON.stringify({ query }),
       },
     );
 
     const json = await productsRes.json();
-    if (!json.products) return res.status(200).json({ debug: json });
-    const products = json.products.map((p) => ({
-      title: p.title,
-      handle: p.handle,
-      image: p.images[0]?.src,
-      imageAlt: p.images[0]?.alt || p.title,
-      price: parseFloat(p.variants[0]?.price || 0).toFixed(0),
-      currency: "NOK",
+    if (!json.data) return res.status(200).json({ debug: json });
+    const products = json.data.products.edges.map(({ node }) => ({
+      title: node.title,
+      handle: node.handle,
+      image: node.featuredImage?.url,
+      imageAlt: node.featuredImage?.altText || node.title,
+      price: parseFloat(node.priceRange.minVariantPrice.amount).toFixed(0),
+      currency: node.priceRange.minVariantPrice.currencyCode,
     }));
 
     res.status(200).json(products);
