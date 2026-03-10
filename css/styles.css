@@ -33,7 +33,7 @@ body {
   overflow-x: hidden;
 }
 
-/* NOISE OVERLAY */
+/* NOISE OVERLAY 
 body::before {
   content: "";
   position: fixed;
@@ -43,6 +43,7 @@ body::before {
   z-index: 0;
   opacity: 0.4;
 }
+*/
 
 /* NAV */
 nav {
