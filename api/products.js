@@ -1,17 +1,18 @@
 let cachedToken = null;
+let tokenExpiry = 0;
 
 async function getStorefrontToken() {
-  if (cachedToken) return cachedToken;
+  if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
 
   const { SHOPIFY_SHOP, SHOPIFY_CLIENT_ID, SHOPIFY_CLIENT_SECRET } =
     process.env;
 
   const res = await fetch(
-    `https://${SHOPIFY_SHOP}/api/2024-01/oauth/access_tokens`,
+    `https://${SHOPIFY_SHOP}/admin/oauth/access_token`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
         grant_type: "client_credentials",
         client_id: SHOPIFY_CLIENT_ID,
         client_secret: SHOPIFY_CLIENT_SECRET,
@@ -19,18 +20,15 @@ async function getStorefrontToken() {
     },
   );
 
-  const text = await res.text();
-  let data;
-  try { data = JSON.parse(text); } catch { return { tokenError: text, status: res.status }; }
-  if (!data.access_token) return { tokenError: data, status: res.status };
+  const data = await res.json();
   cachedToken = data.access_token;
+  tokenExpiry = Date.now() + (data.expires_in - 300) * 1000;
   return cachedToken;
 }
 
 export default async function handler(req, res) {
   try {
     const token = await getStorefrontToken();
-    if (typeof token !== "string") return res.status(200).json({ debug: token });
 
     const query = `{
       products(first: 20, query: "vendor:RubenTCG") {
@@ -61,8 +59,7 @@ export default async function handler(req, res) {
 
     const json = await productsRes.json();
     if (!json.data) return res.status(200).json({ debug: json });
-    const { data } = json;
-    const products = data.products.edges.map(({ node }) => ({
+    const products = json.data.products.edges.map(({ node }) => ({
       title: node.title,
       handle: node.handle,
       image: node.featuredImage?.url,
