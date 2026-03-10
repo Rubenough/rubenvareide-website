@@ -19,7 +19,10 @@ async function getStorefrontToken() {
     },
   );
 
-  const data = await res.json();
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); } catch { return { tokenError: text, status: res.status }; }
+  if (!data.access_token) return { tokenError: data, status: res.status };
   cachedToken = data.access_token;
   return cachedToken;
 }
@@ -27,6 +30,7 @@ async function getStorefrontToken() {
 export default async function handler(req, res) {
   try {
     const token = await getStorefrontToken();
+    if (typeof token !== "string") return res.status(200).json({ debug: token });
 
     const query = `{
       products(first: 20, query: "vendor:RubenTCG") {
