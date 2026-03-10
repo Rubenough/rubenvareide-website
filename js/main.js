@@ -57,7 +57,6 @@ async function loadEmotes() {
 }
 
 loadEmotes();
-loadProducts();
 
 // Twitch live status + live products
 async function loadProducts() {
@@ -105,7 +104,7 @@ async function checkTwitchLive() {
     } else {
       dotEl.classList.add("offline");
       textEl.textContent = "Ikke live nå";
-      // if (productsSection) productsSection.style.display = "none";
+      if (productsSection) productsSection.style.display = "none";
     }
   } catch (e) {
     // silently fail — keep default look
