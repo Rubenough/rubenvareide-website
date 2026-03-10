@@ -105,7 +105,7 @@ async function checkTwitchLive() {
     } else {
       dotEl.classList.add("offline");
       textEl.textContent = "Ikke live nå";
-      if (productsSection) productsSection.style.display = "none";
+      // if (productsSection) productsSection.style.display = "none";
     }
   } catch (e) {
     // silently fail — keep default look
