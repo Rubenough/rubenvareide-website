@@ -10,8 +10,8 @@ async function getStorefrontToken() {
     `https://${SHOPIFY_SHOP}/api/2024-01/oauth/access_tokens`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         grant_type: "client_credentials",
         client_id: SHOPIFY_CLIENT_ID,
         client_secret: SHOPIFY_CLIENT_SECRET,
