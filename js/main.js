@@ -74,7 +74,7 @@ async function loadProducts() {
       .map(
         (p) => `
       <a href="https://apexcollect.no/products/${p.handle}" target="_blank" class="platform-card">
-        ${p.image ? `<img src="${p.image}" alt="${p.imageAlt}" style="width:100%;height:auto;display:block;border-radius:8px;margin-bottom:0.75rem;" />` : ""}
+        ${p.image ? `<img src="${p.image}" alt="${p.imageAlt}" class="product-img" />` : ""}
         <div class="platform-name">${p.title}</div>
         <p class="platform-desc">${p.price} ${p.currency}</p>
         <span style="display:inline-block;margin-top:0.4rem;font-size:0.75rem;padding:2px 8px;border-radius:999px;${p.available ? "background:rgba(0,200,100,0.15);color:#4dffaa;" : "background:rgba(255,255,255,0.06);color:#888;"}">${p.available ? "På lager" : "Utsolgt"}</span>
