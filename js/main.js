@@ -34,6 +34,30 @@ document.querySelectorAll(".emote-tab").forEach((tab) => {
   });
 });
 
+// Twitch emotes
+async function loadEmotes() {
+  try {
+    const res = await fetch("/api/emotes");
+    const tiers = await res.json();
+    for (const [tier, emotes] of Object.entries(tiers)) {
+      const grid = document.querySelector(
+        `.emotes-tier-panel[data-tier="${tier}"] .emotes-grid`,
+      );
+      if (!grid) continue;
+      grid.innerHTML = emotes
+        .map(
+          (e) =>
+            `<div class="emote-slot" title="${e.name}"><img src="${e.url}" alt="${e.name}" /></div>`,
+        )
+        .join("");
+    }
+  } catch (e) {
+    // silently fail — emote panels stay empty
+  }
+}
+
+loadEmotes();
+
 // Twitch live status
 async function checkTwitchLive() {
   const liveEl = document.querySelector(".hero-live");
