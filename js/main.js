@@ -58,6 +58,7 @@ async function loadEmotes() {
 
 loadEmotes();
 loadProducts();
+loadSchedule();
 
 // Twitch live status + live products
 async function loadProducts() {
@@ -83,6 +84,32 @@ async function loadProducts() {
       .join("");
   } catch (e) {
     // silently fail
+  }
+}
+
+// Twitch schedule
+async function loadSchedule() {
+  const container = document.getElementById("schedule-days");
+  const note = document.getElementById("schedule-note");
+  if (!container) return;
+
+  const dayNames = ["Man", "Tir", "Ons", "Tor", "Fre", "Lør", "Søn"];
+
+  try {
+    const res = await fetch("/api/twitch-schedule");
+    const { days } = await res.json();
+
+    container.innerHTML = dayNames
+      .map((name, i) =>
+        days[i]
+          ? `<div class="schedule-day stream-day"><span class="day-name">${name}</span><span class="day-time">${days[i]}</span></div>`
+          : `<div class="schedule-day"><span class="day-name">${name}</span><span class="day-off">—</span></div>`,
+      )
+      .join("");
+
+    if (note) note.textContent = "⚡ Direkte fra Twitch-schedule";
+  } catch (e) {
+    if (note) note.textContent = "⚡ Kunne ikke hente schedule";
   }
 }
 
