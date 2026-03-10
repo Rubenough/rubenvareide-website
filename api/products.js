@@ -55,7 +55,9 @@ export default async function handler(req, res) {
       },
     );
 
-    const { data } = await productsRes.json();
+    const json = await productsRes.json();
+    if (!json.data) return res.status(200).json({ debug: json });
+    const { data } = json;
     const products = data.products.edges.map(({ node }) => ({
       title: node.title,
       handle: node.handle,
@@ -67,6 +69,6 @@ export default async function handler(req, res) {
 
     res.status(200).json(products);
   } catch (e) {
-    res.status(500).json([]);
+    res.status(500).json({ error: e.message });
   }
 }
