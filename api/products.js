@@ -36,6 +36,7 @@ export default async function handler(req, res) {
           node {
             title
             handle
+            availableForSale
             featuredImage { url altText }
             priceRange {
               minVariantPrice { amount currencyCode }
@@ -62,6 +63,7 @@ export default async function handler(req, res) {
     const products = json.data.products.edges.map(({ node }) => ({
       title: node.title,
       handle: node.handle,
+      available: node.availableForSale,
       image: node.featuredImage?.url,
       imageAlt: node.featuredImage?.altText || node.title,
       price: parseFloat(node.priceRange.minVariantPrice.amount).toFixed(0),
