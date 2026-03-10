@@ -57,13 +57,40 @@ async function loadEmotes() {
 }
 
 loadEmotes();
+loadProducts();
 
-// Twitch live status
+// Twitch live status + live products
+async function loadProducts() {
+  const grid = document.getElementById("products-grid");
+  if (!grid) return;
+
+  try {
+    const res = await fetch("/api/products");
+    const products = await res.json();
+    if (!products.length) return;
+
+    grid.innerHTML = products
+      .map(
+        (p) => `
+      <a href="https://rubentcg.no/products/${p.handle}" target="_blank" class="platform-card">
+        ${p.image ? `<img src="${p.image}" alt="${p.imageAlt}" style="width:100%;border-radius:8px;margin-bottom:0.75rem;object-fit:cover;aspect-ratio:1" />` : ""}
+        <div class="platform-name">${p.title}</div>
+        <p class="platform-desc">${p.price} ${p.currency}</p>
+        <span class="platform-arrow">↗</span>
+      </a>`,
+      )
+      .join("");
+  } catch (e) {
+    // silently fail
+  }
+}
+
 async function checkTwitchLive() {
   const liveEl = document.querySelector(".hero-live");
   if (!liveEl) return;
   const dotEl = liveEl.querySelector(".live-dot");
   const textEl = liveEl.querySelector(".live-text");
+  const productsSection = document.getElementById("live-products");
 
   try {
     const res = await fetch("/api/twitch-status");
@@ -71,9 +98,14 @@ async function checkTwitchLive() {
     if (isLive) {
       dotEl.classList.remove("offline");
       textEl.textContent = "LIVE NÅ på Twitch";
+      if (productsSection && productsSection.style.display === "none") {
+        productsSection.style.display = "block";
+        loadProducts();
+      }
     } else {
       dotEl.classList.add("offline");
       textEl.textContent = "Ikke live nå";
+      if (productsSection) productsSection.style.display = "none";
     }
   } catch (e) {
     // silently fail — keep default look
