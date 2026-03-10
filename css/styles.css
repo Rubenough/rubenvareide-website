@@ -713,7 +713,7 @@ footer {
 .footer-logo {
   font-family: "Bebas Neue", sans-serif;
   font-size: 1.5rem;
-  color: var(--muted);
+  color: #9898aa;
   letter-spacing: 0.05em;
 }
 
@@ -723,7 +723,7 @@ footer {
 }
 
 .footer-links a {
-  color: var(--muted);
+  color: #9898aa;
   text-decoration: none;
   font-size: 0.8rem;
   font-family: "Space Mono", monospace;
@@ -736,7 +736,7 @@ footer {
 
 .footer-copy {
   font-size: 0.75rem;
-  color: var(--muted);
+  color: #9898aa;
   font-family: "Space Mono", monospace;
 }
 
