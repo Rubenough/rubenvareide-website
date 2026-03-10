@@ -57,6 +57,7 @@ async function loadEmotes() {
 }
 
 loadEmotes();
+loadProducts();
 
 // Twitch live status + live products
 async function loadProducts() {
@@ -89,7 +90,7 @@ async function checkTwitchLive() {
   if (!liveEl) return;
   const dotEl = liveEl.querySelector(".live-dot");
   const textEl = liveEl.querySelector(".live-text");
-  const productsSection = document.getElementById("live-products");
+  const badge = document.getElementById("stream-status-badge");
 
   try {
     const res = await fetch("/api/twitch-status");
@@ -97,14 +98,19 @@ async function checkTwitchLive() {
     if (isLive) {
       dotEl.classList.remove("offline");
       textEl.textContent = "LIVE NÅ på Twitch";
-      if (productsSection && productsSection.style.display === "none") {
-        productsSection.style.display = "block";
-        loadProducts();
+      if (badge) {
+        badge.textContent = "🔴 LIVE nå";
+        badge.style.background = "rgba(145,70,255,0.2)";
+        badge.style.color = "#b97aff";
       }
     } else {
       dotEl.classList.add("offline");
       textEl.textContent = "Ikke live nå";
-      if (productsSection) productsSection.style.display = "none";
+      if (badge) {
+        badge.textContent = "Ikke live nå";
+        badge.style.background = "rgba(255,255,255,0.06)";
+        badge.style.color = "#aaa";
+      }
     }
   } catch (e) {
     // silently fail — keep default look
